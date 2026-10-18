@@ -6,7 +6,7 @@ import { RequestCard } from "@/components/site/Cards";
 import { sampleRequests, type BloodGroup } from "@/data/sample";
 
 export const Route = createFileRoute("/requests")({
-  validateSearch: (s: Record<string, unknown>): { id?: string } => ({ id: typeof s.id === "string" ? s.id : undefined }),
+  validateSearch: (s: Record<string, unknown>): { id?: string | undefined } => ({ id: typeof s["id"] === "string" ? s["id"] : undefined }),
   head: () => pageHead("Blood Requests", "Browse open blood requests from the LifeDrop community."),
   component: RequestsPage,
 });
