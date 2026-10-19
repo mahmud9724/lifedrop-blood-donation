@@ -37,7 +37,7 @@ export function RequestCard({ request }: { request: BloodRequest }) {
   );
 }
 
-export function StatCard({ stat, icon: Icon }: { stat: Stat; icon?: ComponentType<{ className?: string }> }) {
+export function StatCard({ stat, icon: Icon }: { stat: Stat; icon?: ComponentType<{ className?: string }> | undefined }) {
   return (
     <div className="flex h-full min-w-0 flex-col rounded-2xl border bg-card p-5 shadow-card sm:p-6">
       {Icon && <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft text-primary"><Icon className="h-5 w-5" aria-hidden /></span>}
