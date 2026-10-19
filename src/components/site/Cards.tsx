@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import { Link } from "@tanstack/react-router";
 import { Building2, CalendarDays, MapPin, ArrowRight, AlertTriangle, Clock, CheckCircle2 } from "lucide-react";
 import { Badge, buttonStyles } from "./ui";
