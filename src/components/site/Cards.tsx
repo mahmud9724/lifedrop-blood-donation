@@ -29,7 +29,7 @@ export function RequestCard({ request }: { request: BloodRequest }) {
         <div className="flex items-start gap-3"><CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" aria-hidden /><dt className="sr-only">Required by</dt><dd className="text-muted-foreground">Needed by <time dateTime={request.requiredDate} className="font-medium text-foreground">{formatDate(request.requiredDate)}</time></dd></div>
       </dl>
       <div className="mt-auto p-6 pt-6">
-        <Link to="/requests" search={{ id: request.id }} className={buttonStyles({ variant: request.urgency === "critical" ? "primary" : "outline", className: "w-full" })}>
+        <Link to="/blood-requests" search={{ id: request.id }} className={buttonStyles({ variant: request.urgency === "critical" ? "primary" : "outline", className: "w-full" })}>
           View Details<span className="sr-only">: {request.bloodGroup} request at {request.hospital}</span>
         </Link>
       </div>
