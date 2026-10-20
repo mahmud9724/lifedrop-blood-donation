@@ -32,7 +32,7 @@ export function Footer() {
             <li><Link to="/donate" className={a}>Donor eligibility</Link></li>
             <li><Link to="/news" className={a}>Preparing to donate</Link></li>
             <li><Link to="/request-blood" className={a}>How to request blood</Link></li>
-            <li><Link to="/requests" className={a}>Report a suspicious request</Link></li>
+            <li><Link to="/blood-requests" className={a}>Report a suspicious request</Link></li>
           </ul>
         </nav>
         <div>
