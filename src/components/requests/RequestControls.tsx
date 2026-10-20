@@ -3,7 +3,7 @@ import { Button, type ButtonProps } from '@/components/ui/button';
 import { buttonStyles, type ButtonStyleProps } from '@/components/site/ui';
 
 export function RequestButton({ variant = 'primary', size = 'md', className, ...props }: Omit<ButtonProps, 'variant' | 'size'> & ButtonStyleProps) {
-  return <Button {...props} className={buttonStyles({ variant, size, className })} />;
+  return <Button {...props} variant="ghost" className={buttonStyles({ variant, size, className })} />;
 }
 export function RequestSelect({ label, value, onChange, children }: { label: string; value: string; onChange: (value: string) => void; children: ReactNode }) {
   return <label className="flex min-w-0 flex-col gap-2 text-sm font-semibold">
