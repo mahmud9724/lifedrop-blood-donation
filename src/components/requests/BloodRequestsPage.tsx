@@ -9,7 +9,7 @@ import { RequestButton, RequestSelect } from './RequestControls';
 import { RequestDetails } from './RequestDetails';
 
 const pageSize = 6;
-export function BloodRequestsPage({ id, previewError = false, onSelect }: { id?: string; previewError?: boolean; onSelect: (id?: string) => void }) {
+export function BloodRequestsPage({ id, previewError = false, onSelect }: { id?: string | undefined; previewError?: boolean; onSelect: (id?: string) => void }) {
   const [filters, setFilters] = useState<RequestFilters>(defaultFilters);
   const [requests, setRequests] = useState<ListedRequest[]>([]);
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');

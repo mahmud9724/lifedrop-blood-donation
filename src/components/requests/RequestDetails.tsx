@@ -5,7 +5,7 @@ import { urgencyLabel } from '@/data/sample';
 import { canHelp, formatRequestTime, statusLabels, type ListedRequest } from '@/data/blood-requests';
 import { RequestButton } from './RequestControls';
 
-export function RequestDetails({ request: r, missing, helping, onClose, onHelp }: { request?: ListedRequest; missing: boolean; helping: boolean; onClose: () => void; onHelp: () => void }) {
+export function RequestDetails({ request: r, missing, helping, onClose, onHelp }: { request?: ListedRequest | undefined; missing: boolean; helping: boolean; onClose: () => void; onHelp: () => void }) {
   return <Dialog open={Boolean(r) || missing} onOpenChange={open => { if (!open) onClose(); }}><DialogContent className="max-h-[85dvh] w-[calc(100%-2rem)] overflow-y-auto rounded-2xl sm:max-w-xl">
     <DialogHeader><DialogTitle className="pr-6 text-2xl font-bold">{missing ? 'Request not found' : helping ? 'Thank you for offering to help' : 'Blood request details'}</DialogTitle><DialogDescription>{missing ? 'This request is not part of the current sample data.' : `Fictional demo request · ${r?.id}`}</DialogDescription></DialogHeader>
     {r && <>
