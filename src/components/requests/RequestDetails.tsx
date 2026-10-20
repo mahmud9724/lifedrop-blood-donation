@@ -1,4 +1,5 @@
 import { AlertTriangle, HeartHandshake, ShieldCheck } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Badge } from '@/components/site/ui';
 import { urgencyLabel } from '@/data/sample';
@@ -6,7 +7,9 @@ import { canHelp, formatRequestTime, statusLabels, type ListedRequest } from '@/
 import { RequestButton } from './RequestControls';
 
 export function RequestDetails({ request: r, missing, helping, onClose, onHelp }: { request?: ListedRequest | undefined; missing: boolean; helping: boolean; onClose: () => void; onHelp: () => void }) {
-  return <Dialog open={Boolean(r) || missing} onOpenChange={open => { if (!open) onClose(); }}><DialogContent className="max-h-[85dvh] w-[calc(100%-2rem)] overflow-y-auto rounded-2xl sm:max-w-xl">
+  const contentRef = useRef<HTMLDivElement>(null);
+  useEffect(() => { if (contentRef.current) contentRef.current.scrollTop = 0; }, [helping, r?.id]);
+  return <Dialog open={Boolean(r) || missing} onOpenChange={open => { if (!open) onClose(); }}><DialogContent ref={contentRef} className="max-h-[85dvh] w-[calc(100%-2rem)] overflow-y-auto rounded-2xl sm:max-w-xl">
     <DialogHeader><DialogTitle className="pr-6 text-2xl font-bold">{missing ? 'Request not found' : helping ? 'Thank you for offering to help' : 'Blood request details'}</DialogTitle><DialogDescription>{missing ? 'This request is not part of the current sample data.' : `Fictional demo request · ${r?.id}`}</DialogDescription></DialogHeader>
     {r && <>
       <div className="flex flex-wrap items-center gap-3"><span className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary text-xl font-bold text-primary-foreground"><span className="sr-only">Blood group </span>{r.bloodGroup}</span><Badge tone={r.urgency}>{r.urgency === 'critical' && <AlertTriangle className="h-4 w-4" aria-hidden />}{urgencyLabel[r.urgency]}</Badge><Badge>{statusLabels[r.status]}</Badge></div>
