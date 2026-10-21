@@ -8,9 +8,10 @@ const urgencyIcon = { critical: AlertTriangle, urgent: Clock, normal: CheckCircl
 
 export function RequestCard({ request }: { request: BloodRequest }) {
   const Icon = urgencyIcon[request.urgency];
+  const critical = request.urgency === "critical";
   return (
-    <article className="group relative flex min-w-0 flex-col rounded-2xl border bg-card shadow-card transition-[box-shadow,border-color] hover:border-primary/30 hover:shadow-lift focus-within:border-primary/40">
-      {request.urgency === "critical" && <span aria-hidden className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-primary" />}
+    <article className={`group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border shadow-card transition-[box-shadow,border-color,transform] duration-300 hover:-translate-y-0.5 hover:shadow-lift focus-within:border-primary/40 ${critical ? "border-primary/40 bg-gradient-to-b from-primary-soft/60 via-card to-card hover:border-primary/50" : "bg-card hover:border-primary/30"}`}>
+      {critical && <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-primary to-primary/60" />}
       <div className="flex items-center gap-4 p-6 pb-5">
         <div className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl bg-primary text-primary-foreground">
           <span className="sr-only">Blood group</span>
@@ -58,7 +59,7 @@ export function NewsCard({ article }: { article: Article }) {
           <Badge tone="critical">{article.category}</Badge>
           <time dateTime={article.date} className="text-muted-foreground">{formatDate(article.date)}</time>
         </div>
-        <h3 className="mt-4 text-lg font-semibold leading-snug">{article.title}</h3>
+        <h3 className="mt-4 text-lg font-semibold leading-snug transition-colors duration-300 group-hover:text-primary">{article.title}</h3>
         <p className="mt-2 flex-1 text-sm text-muted-foreground">{article.excerpt}</p>
         <Link to="/news" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-secondary focus-visible:underline focus-visible:outline-none">
           Read More <ArrowRight className="h-4 w-4" aria-hidden /><span className="sr-only">: {article.title}</span>
