@@ -3,3 +3,8 @@
 - [x] Build listing, details, help preview, loading, empty and error states.
 - [x] Connect existing navigation and preserve /requests.
 - [x] Verify interactions, accessibility and mobile layout.
+# Landing redesign (steps 1–3)
+- [x] Fix urgent request card top accent, spacing and hover states.
+- [x] Modernize landing page hero, sections and scroll-reveal animations.
+- [x] Add Top Donors ("Our Everyday Heroes") section with demo data and tests.
+- [x] Verify desktop/mobile rendering, overflow, CTAs and build.
