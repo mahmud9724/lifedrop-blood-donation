@@ -9,11 +9,11 @@ describe('Donor directory', () => {
     expect(filterDonors(demoDonors, { ...defaultDonorFilters, city: 'Westhaven' }).map(d => d.slug)).toEqual(['daniel-m', 'hana-y']);
   });
   it('filters by availability', () => {
-    expect(filterDonors(demoDonors, { ...defaultDonorFilters, availability: 'unavailable' }).map(d => d.slug)).toEqual(['tomas-b', 'omar-d']);
+    expect(filterDonors(demoDonors, { ...defaultDonorFilters, availability: 'unavailable' }).map(d => d.slug)).toEqual(['omar-d', 'tomas-b']);
   });
   it('searches name and city case insensitively', () => {
     expect(filterDonors(demoDonors, { ...defaultDonorFilters, search: 'amara' }).map(d => d.slug)).toEqual(['amara-h']);
-    expect(filterDonors(demoDonors, { ...defaultDonorFilters, search: 'LAKEVIEW' }).map(d => d.slug)).toEqual(['rafiq-a', 'marcus-l']);
+    expect(filterDonors(demoDonors, { ...defaultDonorFilters, search: 'LAKEVIEW' }).map(d => d.slug)).toEqual(['marcus-l', 'rafiq-a']);
   });
   it('combines filters and supports no results', () => {
     expect(filterDonors(demoDonors, { ...defaultDonorFilters, bloodGroup: 'AB-', city: 'Ashford' })).toEqual([]);
