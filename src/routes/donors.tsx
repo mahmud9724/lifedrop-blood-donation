@@ -1,11 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { PlaceholderPage, pageHead } from "@/components/site/PlaceholderPage";
+import { Outlet } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
+import { pageHead } from '@/components/site/PlaceholderPage';
 
-export const Route = createFileRoute("/donors")({
-  head: () => pageHead("Find Donors", "Search for donors by blood group and city"),
-  component: DonorsPage,
+export const Route = createFileRoute('/donors')({
+  validateSearch: (s: Record<string, unknown>): { preview?: string | undefined } => ({ preview: typeof s['preview'] === 'string' ? s['preview'] : undefined }),
+  head: () => pageHead('Find Blood Donors', 'Search the LifeDrop community donor directory by blood group, city and availability. Fictional demo donors, with contact details kept private.'),
+  component: () => <Outlet />,
 });
-
-function DonorsPage() {
-  return <PlaceholderPage eyebrow="Find Donors" title="Find Donors" description="Donor discovery will let you search by blood group and area while keeping donor contact details private until they choose to respond." />;
-}
