@@ -7,4 +7,8 @@
 - [x] Fix urgent request card top accent, spacing and hover states.
 - [x] Modernize landing page hero, sections and scroll-reveal animations.
 - [x] Add Top Donors ("Our Everyday Heroes") section with demo data and tests.
-- [x] Verify desktop/mobile rendering, overflow, CTAs and build.
+- [x] Verify desktop/mobile rendering, overflow, CTAs and build.# Donor directory
+- [x] Build donor fixtures, filtering and sorting with tests.
+- [x] Build /donors listing with search, filters, loading/empty/error states and contact preview.
+- [x] Build /donors/$slug profile pages with history summary and privacy panel.
+- [ ] Verify routing, accessibility and mobile layout.
