@@ -19,6 +19,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RequestBloodRouteImport } from './routes/request-blood'
 import { Route as RequestsRouteImport } from './routes/requests'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as DonorsSlugRouteImport } from './routes/donors.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,43 +71,51 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DonorsSlugRoute = DonorsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => DonorsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blood-requests': typeof BloodRequestsRoute
   '/donate': typeof DonateRoute
-  '/donors': typeof DonorsRoute
+  '/donors': typeof DonorsRouteWithChildren
   '/login': typeof LoginRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
   '/request-blood': typeof RequestBloodRoute
   '/requests': typeof RequestsRoute
   '/terms': typeof TermsRoute
+  '/donors/$slug': typeof DonorsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blood-requests': typeof BloodRequestsRoute
   '/donate': typeof DonateRoute
-  '/donors': typeof DonorsRoute
+  '/donors': typeof DonorsRouteWithChildren
   '/login': typeof LoginRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
   '/request-blood': typeof RequestBloodRoute
   '/requests': typeof RequestsRoute
   '/terms': typeof TermsRoute
+  '/donors/$slug': typeof DonorsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blood-requests': typeof BloodRequestsRoute
   '/donate': typeof DonateRoute
-  '/donors': typeof DonorsRoute
+  '/donors': typeof DonorsRouteWithChildren
   '/login': typeof LoginRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
   '/request-blood': typeof RequestBloodRoute
   '/requests': typeof RequestsRoute
   '/terms': typeof TermsRoute
+  '/donors/$slug': typeof DonorsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/request-blood'
     | '/requests'
     | '/terms'
+    | '/donors/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/request-blood'
     | '/requests'
     | '/terms'
+    | '/donors/$slug'
   id:
     | '__root__'
     | '/'
@@ -145,13 +156,14 @@ export interface FileRouteTypes {
     | '/request-blood'
     | '/requests'
     | '/terms'
+    | '/donors/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BloodRequestsRoute: typeof BloodRequestsRoute
   DonateRoute: typeof DonateRoute
-  DonorsRoute: typeof DonorsRoute
+  DonorsRoute: typeof DonorsRouteWithChildren
   LoginRoute: typeof LoginRoute
   NewsRoute: typeof NewsRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -232,14 +244,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/donors/$slug': {
+      id: '/donors/$slug'
+      path: '/$slug'
+      fullPath: '/donors/$slug'
+      preLoaderRoute: typeof DonorsSlugRouteImport
+      parentRoute: typeof DonorsRoute
+    }
   }
 }
+
+interface DonorsRouteChildren {
+  DonorsSlugRoute: typeof DonorsSlugRoute
+}
+
+const DonorsRouteChildren: DonorsRouteChildren = {
+  DonorsSlugRoute: DonorsSlugRoute,
+}
+
+const DonorsRouteWithChildren =
+  DonorsRoute._addFileChildren(DonorsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BloodRequestsRoute: BloodRequestsRoute,
   DonateRoute: DonateRoute,
-  DonorsRoute: DonorsRoute,
+  DonorsRoute: DonorsRouteWithChildren,
   LoginRoute: LoginRoute,
   NewsRoute: NewsRoute,
   PrivacyRoute: PrivacyRoute,
