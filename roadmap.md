@@ -11,4 +11,4 @@
 - [x] Build donor fixtures, filtering and sorting with tests.
 - [x] Build /donors listing with search, filters, loading/empty/error states and contact preview.
 - [x] Build /donors/$slug profile pages with history summary and privacy panel.
-- [ ] Verify routing, accessibility and mobile layout.
+- [x] Verify routing, accessibility and mobile layout.
