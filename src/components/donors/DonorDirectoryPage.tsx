@@ -1,24 +1,23 @@
 import { useEffect, useState } from 'react';
+import { Link } from '@tanstack/react-router';
 import { AlertTriangle, Loader2, RotateCcw, Search, SearchX, SlidersHorizontal, Users } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { buttonStyles } from '@/components/site/ui';
 import { RequestButton, RequestSelect } from '@/components/requests/RequestControls';
-import { availabilityLabels, bloodGroups, defaultDonorFilters, donorCities, filterDonors, loadDemoDonors, type DonorFilters } from '@/data/donors';
+import { availabilityLabels, bloodGroups, defaultDonorFilters, donorCities, filterDonors, loadDemoDonors, type DirectoryDonor, type DonorFilters } from '@/data/donors';
 import { DonorCard } from './DonorCard';
-import { DonorContactDialog } from './DonorContactDialog';
-import { findDonorBySlug } from '@/data/donors';
 
-export function DonorDirectoryPage({ onContact }: { onContact: (slug: string) => void }) {
+export function DonorDirectoryPage({ previewError = false, onContact }: { previewError?: boolean; onContact: (slug: string) => void }) {
   const [filters, setFilters] = useState<DonorFilters>(defaultDonorFilters);
-  const [donors, setDonors] = useState<ReturnType<typeof loadDemoDonors> extends Promise<infer T> ? T : never>([]);
+  const [donors, setDonors] = useState<DirectoryDonor[]>([]);
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let active = true;
     setState('loading');
-    loadDemoDonors(attempt === 0 && window.location.search.includes('preview-error')).then(data => { if (active) { setDonors(data); setState('ready'); } }).catch(() => { if (active) setState('error'); });
+    loadDemoDonors(previewError && attempt === 0).then(data => { if (active) { setDonors(data); setState('ready'); } }).catch(() => { if (active) setState('error'); });
     return () => { active = false; };
-  }, [attempt]);
+  }, [attempt, previewError]);
   const update = (key: keyof DonorFilters, value: string) => setFilters(prev => ({ ...prev, [key]: value }));
   const reset = () => setFilters(defaultDonorFilters);
   const results = filterDonors(donors, filters);
@@ -27,9 +26,9 @@ export function DonorDirectoryPage({ onContact }: { onContact: (slug: string) =>
   return <div className="bg-surface">
     <section className="border-b bg-background">
       <div className="container-page py-10 md:py-14">
-        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-center">
-          <div><p className="mb-2 flex items-center gap-2 text-sm font-semibold text-primary"><Users className="h-4 w-4" aria-hidden />A community of everyday heroes</p><h1 className="text-4xl font-bold md:text-5xl">Find Blood Donors</h1><p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">Search the donor directory by name, blood group or area. Donor contact details stay private — contact happens through LifeDrop, and a donor decides whether to respond.</p></div>
-        </div>
+        <p className="mb-2 flex items-center gap-2 text-sm font-semibold text-primary"><Users className="h-4 w-4" aria-hidden />A community of everyday heroes</p>
+        <h1 className="text-4xl font-bold md:text-5xl">Find Blood Donors</h1>
+        <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">Search the donor directory by name, blood group or area. Donor contact details stay private — contact happens through LifeDrop, and a donor decides whether to respond.</p>
         <p className="mt-6 flex items-start gap-2 text-xs text-muted-foreground"><AlertTriangle className="h-4 w-4 shrink-0" aria-hidden />Fictional demo donors only. These profiles are not real people, statistics or donation records, and no contact information is shown or collected.</p>
       </div>
     </section>
@@ -54,8 +53,5 @@ export function DonorDirectoryPage({ onContact }: { onContact: (slug: string) =>
       </section>
       <div className="mt-10"><Link to="/request-blood" className={buttonStyles()}>Request Blood instead</Link></div>
     </div>
-    <DonorContactDialog donor={undefined} onClose={() => {}} />
   </div>;
 }
-
-import { Link } from '@tanstack/react-router';
