@@ -21,7 +21,7 @@ describe("App routing", () => {
   });
   it("matches the donor directory and a donor profile page", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
-    expect(router.matchRoutes("/donors").at(-1)?.routeId).toBe("/donors");
+    expect(router.matchRoutes("/donors").at(-1)?.routeId).toBe("/donors/");
     expect(router.matchRoutes("/donors/amara-h").at(-1)?.routeId).toBe("/donors/$slug");
   });
 });
