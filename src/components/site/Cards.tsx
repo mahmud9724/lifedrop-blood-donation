@@ -50,18 +50,18 @@ export function StatCard({ stat, icon: Icon }: { stat: Stat; icon?: ComponentTyp
 
 export function NewsCard({ article }: { article: Article }) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-card transition-shadow hover:shadow-lift">
-      <div className="aspect-[16/10] overflow-hidden bg-muted">
+    <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-card transition-shadow hover:shadow-lift">
+      <div className="aspect-[16/10] w-full shrink-0 overflow-hidden bg-muted">
         <img src={article.image} alt="" loading="lazy" width={1024} height={640} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
       </div>
       <div className="flex flex-1 flex-col p-6">
-        <div className="flex items-center gap-3 text-xs">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
           <Badge tone="critical">{article.category}</Badge>
           <time dateTime={article.date} className="text-muted-foreground">{formatDate(article.date)}</time>
         </div>
         <h3 className="mt-4 text-lg font-semibold leading-snug transition-colors duration-300 group-hover:text-primary">{article.title}</h3>
-        <p className="mt-2 flex-1 text-sm text-muted-foreground">{article.excerpt}</p>
-        <Link to="/news" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-secondary focus-visible:underline focus-visible:outline-none">
+        <p className="mt-2 text-sm text-muted-foreground">{article.excerpt}</p>
+        <Link to="/news" className="mt-auto inline-flex items-center self-start pt-5 gap-1.5 text-sm font-semibold text-primary hover:text-secondary focus-visible:underline focus-visible:outline-none">
           Read More <ArrowRight className="h-4 w-4" aria-hidden /><span className="sr-only">: {article.title}</span>
         </Link>
       </div>

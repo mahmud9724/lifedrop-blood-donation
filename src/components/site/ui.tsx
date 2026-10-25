@@ -7,11 +7,13 @@ export const buttonStyles = cva(
   {
     variants: {
       variant: {
-        primary: "bg-primary text-primary-foreground hover:bg-secondary shadow-card",
-        outline: "border border-input bg-background text-foreground hover:border-primary hover:text-primary",
-        ghost: "text-foreground hover:bg-muted",
-        soft: "bg-primary-soft text-secondary hover:bg-primary hover:text-primary-foreground",
-        inverse: "bg-background text-secondary hover:bg-primary-soft",
+        // Text colours are explicit for every state so they can never inherit a clashing colour
+        // (e.g. the shadcn ghost variant's `hover:text-accent-foreground`, which equals `--secondary`).
+        primary: "bg-primary text-primary-foreground shadow-card hover:bg-secondary hover:text-primary-foreground focus-visible:text-primary-foreground active:bg-secondary active:text-primary-foreground",
+        outline: "border border-input bg-background text-foreground hover:border-primary hover:bg-background hover:text-primary focus-visible:text-primary active:text-primary",
+        ghost: "text-foreground hover:bg-muted hover:text-foreground focus-visible:text-foreground active:text-foreground",
+        soft: "bg-primary-soft text-secondary hover:bg-primary hover:text-primary-foreground focus-visible:text-secondary active:bg-primary active:text-primary-foreground",
+        inverse: "bg-background text-secondary hover:bg-primary-soft hover:text-secondary focus-visible:text-secondary active:text-secondary",
       },
       size: {
         sm: "h-9 px-4 text-sm",
