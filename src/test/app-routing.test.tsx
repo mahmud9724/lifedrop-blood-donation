@@ -24,4 +24,10 @@ describe("App routing", () => {
     expect(router.matchRoutes("/donors").at(-1)?.routeId).toBe("/donors/");
     expect(router.matchRoutes("/donors/amara-h").at(-1)?.routeId).toBe("/donors/$slug");
   });
+  it("matches the request and donor registration forms, and keeps the old /donate URL", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes("/request-blood").at(-1)?.routeId).toBe("/request-blood");
+    expect(router.matchRoutes("/donate-blood").at(-1)?.routeId).toBe("/donate-blood");
+    expect(router.matchRoutes("/donate").at(-1)?.routeId).toBe("/donate");
+  });
 });

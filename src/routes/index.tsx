@@ -66,7 +66,7 @@ function Index() {
             <Reveal delay={260}>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link to="/request-blood" className={buttonStyles({ size: "lg", className: "shadow-lift transition-transform duration-300 hover:-translate-y-0.5" })}><Droplet className="h-5 w-5" aria-hidden /> Request Blood</Link>
-                <Link to="/donate" className={buttonStyles({ variant: "outline", size: "lg", className: "transition-transform duration-300 hover:-translate-y-0.5" })}>Become a Donor</Link>
+                <Link to="/donate-blood" className={buttonStyles({ variant: "outline", size: "lg", className: "transition-transform duration-300 hover:-translate-y-0.5" })}>Become a Donor</Link>
               </div>
             </Reveal>
             <Reveal delay={340}>
@@ -144,7 +144,7 @@ function Index() {
             <div>
               <h2 className="text-3xl font-bold md:text-4xl">Become a donor. Be someone's reason for tomorrow.</h2>
               <p className="mt-4 text-lg text-secondary-foreground/90">Join a community of people ready to help when it matters most. You decide when you're available.</p>
-              <Link to="/donate" className={buttonStyles({ variant: "inverse", size: "lg", className: "mt-8" })}>Register as Donor</Link>
+              <Link to="/donate-blood" className={buttonStyles({ variant: "inverse", size: "lg", className: "mt-8" })}>Register as Donor</Link>
             </div>
             <ul className="grid gap-4 sm:grid-cols-2">
               {["Get alerts for your blood group nearby", "Control your availability anytime", "Your contact stays private by default", "Track your donation history"].map((b) => (

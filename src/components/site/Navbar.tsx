@@ -7,7 +7,7 @@ export const navLinks = [
   { to: "/", label: "Home" },
   { to: "/donors", label: "Find Donors" },
   { to: "/blood-requests", label: "Blood Requests" },
-  { to: "/donate", label: "Donate Blood" },
+  { to: "/donate-blood", label: "Donate Blood" },
   { to: "/news", label: "News" },
 ] as const;
 

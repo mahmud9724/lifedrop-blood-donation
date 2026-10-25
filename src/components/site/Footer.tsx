@@ -29,7 +29,7 @@ export function Footer() {
         <nav aria-label="Donation resources">
           <p className={h}>Resources</p>
           <ul className="mt-4 space-y-2.5">
-            <li><Link to="/donate" className={a}>Donor eligibility</Link></li>
+            <li><Link to="/donate-blood" className={a}>Donor eligibility</Link></li>
             <li><Link to="/news" className={a}>Preparing to donate</Link></li>
             <li><Link to="/request-blood" className={a}>How to request blood</Link></li>
             <li><Link to="/blood-requests" className={a}>Report a suspicious request</Link></li>

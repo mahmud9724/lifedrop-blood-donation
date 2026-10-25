@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BloodRequestsRouteImport } from './routes/blood-requests'
 import { Route as DonateRouteImport } from './routes/donate'
+import { Route as DonateBloodRouteImport } from './routes/donate-blood'
 import { Route as DonorsRouteImport } from './routes/donors'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as NewsRouteImport } from './routes/news'
@@ -35,6 +36,11 @@ const BloodRequestsRoute = BloodRequestsRouteImport.update({
 const DonateRoute = DonateRouteImport.update({
   id: '/donate',
   path: '/donate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DonateBloodRoute = DonateBloodRouteImport.update({
+  id: '/donate-blood',
+  path: '/donate-blood',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DonorsRoute = DonorsRouteImport.update({
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blood-requests': typeof BloodRequestsRoute
   '/donate': typeof DonateRoute
+  '/donate-blood': typeof DonateBloodRoute
   '/donors': typeof DonorsRouteWithChildren
   '/login': typeof LoginRoute
   '/news': typeof NewsRoute
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blood-requests': typeof BloodRequestsRoute
   '/donate': typeof DonateRoute
+  '/donate-blood': typeof DonateBloodRoute
   '/login': typeof LoginRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/blood-requests': typeof BloodRequestsRoute
   '/donate': typeof DonateRoute
+  '/donate-blood': typeof DonateBloodRoute
   '/donors': typeof DonorsRouteWithChildren
   '/login': typeof LoginRoute
   '/news': typeof NewsRoute
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blood-requests'
     | '/donate'
+    | '/donate-blood'
     | '/donors'
     | '/login'
     | '/news'
@@ -145,6 +155,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blood-requests'
     | '/donate'
+    | '/donate-blood'
     | '/login'
     | '/news'
     | '/privacy'
@@ -158,6 +169,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blood-requests'
     | '/donate'
+    | '/donate-blood'
     | '/donors'
     | '/login'
     | '/news'
@@ -173,6 +185,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BloodRequestsRoute: typeof BloodRequestsRoute
   DonateRoute: typeof DonateRoute
+  DonateBloodRoute: typeof DonateBloodRoute
   DonorsRoute: typeof DonorsRouteWithChildren
   LoginRoute: typeof LoginRoute
   NewsRoute: typeof NewsRoute
@@ -203,6 +216,13 @@ declare module '@tanstack/react-router' {
       path: '/donate'
       fullPath: '/donate'
       preLoaderRoute: typeof DonateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/donate-blood': {
+      id: '/donate-blood'
+      path: '/donate-blood'
+      fullPath: '/donate-blood'
+      preLoaderRoute: typeof DonateBloodRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/donors': {
@@ -288,6 +308,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BloodRequestsRoute: BloodRequestsRoute,
   DonateRoute: DonateRoute,
+  DonateBloodRoute: DonateBloodRoute,
   DonorsRoute: DonorsRouteWithChildren,
   LoginRoute: LoginRoute,
   NewsRoute: NewsRoute,

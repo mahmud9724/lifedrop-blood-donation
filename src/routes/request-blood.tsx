@@ -1,11 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PlaceholderPage, pageHead } from "@/components/site/PlaceholderPage";
+import { pageHead } from "@/components/site/PlaceholderPage";
+import { RequestBloodForm } from "@/components/forms/RequestBloodForm";
 
 export const Route = createFileRoute("/request-blood")({
-  head: () => pageHead("Request Blood", "Post a blood request on LifeDrop"),
-  component: RequestBloodPage,
+  head: () => pageHead("Request Blood", "Post a blood request on LifeDrop (demo form)"),
+  component: RequestBloodForm,
 });
-
-function RequestBloodPage() {
-  return <PlaceholderPage eyebrow="Request Blood" title="Request Blood" description="Soon you'll be able to post a request with blood group, units, hospital and date so nearby donors can respond." />;
-}
